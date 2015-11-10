@@ -6,10 +6,12 @@ describe('myApp.view2 module', function() {
 
   describe('view2 controller', function(){
 
-    it('should ....', inject(function($controller) {
-      //spec body
-      var view2Ctrl = $controller('View2Ctrl');
-      expect(view2Ctrl).toBeDefined();
+    it('should call getFriends on instantiating the controller', inject(function($controller) {
+      var scope = {};
+      var mockFriendsService = { getFriends : function() {} };
+      spyOn(mockFriendsService, 'getFriends');
+      var view2Ctrl = $controller('View2Ctrl', {$scope: scope, friendsService: mockFriendsService});
+      expect(mockFriendsService.getFriends).toHaveBeenCalled();
     }));
 
   });

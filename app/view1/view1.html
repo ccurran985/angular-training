@@ -1,1 +1,15 @@
-<p>This is the partial for view 1.</p>
+<h1>Login</h1>
+
+<br/>
+<br/>
+<br/>
+<br/>
+
+
+<div ng-if="error">Something went wrong</div>
+
+<form ng-submit="sendLoginDetails()">
+  <input type=text placeholder="Username" ng-model="username"/>
+  <input type=password placeholder="Password" ng-model="password"/>
+  <input type=submit value="login"></input>
+</form>

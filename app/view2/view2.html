@@ -1,5 +1,36 @@
-<p>This is the partial for view 2.</p>
-<p>
-  Showing of 'interpolate' filter:
-  {{ 'Current version is v%VERSION%.' | interpolate }}
-</p>
+<h1>Bookface</h1>
+
+<br/>
+<br/>
+<br/>
+<br/>
+
+<form ng-submit="addFriend()">
+  <input type=text placeholder="Friend's name" ng-model="friendToAdd"/>
+  <input type=submit value="Add friend" />
+</form>
+
+<br/>
+<button ng-click = "findFriends()"> find Friends</button>
+<br/>
+<div ng-if="friends">
+  <div ng-repeat="friend in friends">
+    <ul>
+      <li>
+        id = {{friend.id}} name = {{friend.name}}
+        <button ng-click="removeFriend(friend)">Delete Friend</button>
+      </li>
+    </ul>
+  </div>
+
+  <button ng-click="removeAllFriends()">Delete ALL Friends</button>
+  <br/>
+
+  <div ng-if="canBeRestored"><button ng-click="undoDelete()">Undo</button></div>
+  <br/>
+
+  <div ng-if="restoreFriends">
+    <button ng-click="restoreAllFriends()">Restore Friends</button>
+  </div>
+  <!-- <div ng-repeat="mate in friendsToRestore">{{mate}}</div> -->
+</div>
