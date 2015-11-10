@@ -31,6 +31,8 @@ describe('myApp.view2 module', function() {
       var dependencies = { $scope: scope, loginService: {}  }; // empty object
       //Mocked out controller
       var view1Ctrl = $controller('View1Ctrl', dependencies);
+      //calling scope method
+      scope.sendLoginDetails();
       //check to see sendLoginDetails was called
       spyOn(loginService, 'sendLoginRequest');
     }));//end of test

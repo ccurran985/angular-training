@@ -11,10 +11,11 @@ describe('myApp.view2 module', function() {
     });
 
     it('should call getFriends on instantiating the controller', inject(function($controller) {
-      var mockFriendsService = { getFriends : function() {} };
+      var mockFriendsService = { getFriends : function() { return [ {name : 'bob'} ] } };
       spyOn(mockFriendsService, 'getFriends');
       var view2Ctrl = $controller('View2Ctrl', {$scope: scope, friendsService: mockFriendsService});
       expect(mockFriendsService.getFriends).toHaveBeenCalled();
+      expect(scope.friends).toContain({name : 'bob'});
     }));
 
     it('should call getFriends service method from findFriends controller method', inject(function($controller) {
@@ -32,6 +33,6 @@ describe('myApp.view2 module', function() {
       scope.addFriend();
       expect(mockFriendsService.addFriend).toHaveBeenCalled();
     }));
-
+    
   });
 });
