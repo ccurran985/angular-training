@@ -25,7 +25,7 @@ describe('myApp.view2 module', function() {
 
     it('controller should call the loginService.sendLoginDetails function',
     inject(function($controller, $httpBackend, loginService) {
-      //Mock Scope; Empty Object
+      //Mock Scope;
       var scope = { username: 'admin', password: 'password' };
       //Dependencies
       var dependencies = { $scope: scope, loginService: {}  }; // empty object
