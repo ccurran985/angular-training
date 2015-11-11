@@ -11,8 +11,12 @@ describe('myApp.view2 module', function() {
     });
 
     it('should call getFriends on instantiating the controller', inject(function($controller) {
-      var mockFriendsService = { getFriends : function() { return [ {name : 'bob'} ] } };
-      spyOn(mockFriendsService, 'getFriends');
+      var mockFriendsService = {
+        getFriends : function(callback) {
+          callback([{name : 'bob'}])
+        }
+      };
+      spyOn(mockFriendsService, 'getFriends').and.callThrough();
       var view2Ctrl = $controller('View2Ctrl', {$scope: scope, friendsService: mockFriendsService});
       expect(mockFriendsService.getFriends).toHaveBeenCalled();
       expect(scope.friends).toContain({name : 'bob'});
@@ -33,6 +37,24 @@ describe('myApp.view2 module', function() {
       scope.addFriend();
       expect(mockFriendsService.addFriend).toHaveBeenCalled();
     }));
-    
+
+    it('should call removeFriend service method from removeFriend controller method', inject(function($controller){
+      scope.friends = [ {name : 'bob'} ];
+      var callbackWhaaa = function (names) {scope.names = names};
+      var mockFriendsService = {
+        getFriends: function(callback){
+          callback();
+        },
+        removeFriend : function(callback) {
+          getFriends(callback);
+        }
+      };
+      spyOn(mockFriendsService, 'removeFriend').and.callThrough();
+      var view2Ctrl = $controller('View2Ctrl', {$scope: scope, friendsService: mockFriendsService});
+      scope.removeFriend(callbackWhaaa([]));
+      expect(mockFriendsService.removeFriend).toHaveBeenCalled();
+      expect(scope.friends).not.toContain({name : 'bob'});
+    }));
+
   });
 });

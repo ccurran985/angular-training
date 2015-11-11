@@ -37,11 +37,9 @@ angular.module('myApp.view2', ['ngRoute'])
   }
 
   this.removeFriend = function(id, updateFriends) {
-    console.log('Deleting friend with: ' + id);
     $http.delete('http://localhost:8910/person/' + id)
     .then(
       function () {
-        console.log("Delete call success!")
         self.getFriends(updateFriends);
       },
       function () {

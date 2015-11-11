@@ -28,7 +28,7 @@ describe('myApp.view2 module', function() {
       //Mock Scope;
       var scope = { username: 'admin', password: 'password' };
       //Dependencies
-      var dependencies = { $scope: scope, loginService: {}  }; // empty object
+      var dependencies = { $scope: scope, loginService: { sendLoginRequest : function() {} }  }; // empty object
       //Mocked out controller
       var view1Ctrl = $controller('View1Ctrl', dependencies);
       //calling scope method
